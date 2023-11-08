@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        AIRBnB Price Prediction
+    </head>
+    <body>
+        <h1>
+            Enter the values:
+        </h1>
+            <form action="/predict" method="post">
+
+        
+        
+                <label for="neighbourhood_group">Neighbourhood Group:</label>
+                <select name="neighbourhood_group" required>
+                    <option value="0">Brooklyn</option>
+                    <option value="1">Manhattan</option>
+                    <option value="2">Queens</option>
+                    <option value="3">Staten Island</option>
+                    <option value="4">Bronx</option>
+                </select>
+        
+                <!-- <label for="neighbourhood">Neighbourhood:</label>
+                <input type="text" name="neighbourhood" required> -->
+        
+                <label for="latitude">Latitude:</label>
+                <input type="number" name="latitude" step="0.000001" required>
+        
+                <label for="longitude">Longitude:</label>
+                <input type="number" name="longitude" step="0.000001" required>
+        
+                <label for="room_type">Room Type:</label>
+                <select name="room_type" required>
+                    <option value="0">Entire home/Apt</option>
+                    <option value="1">Private room</option>
+                    <option value="2">Shared room</option>
+                </select>
+        
+        
+                <label for="minimum_nights">Minimum Nights:</label>
+                <input type="number" name="minimum_nights" min=1 required>
+        
+                <label for="number_of_reviews">Number of Reviews:</label>
+                <input type="number" name="number_of_reviews"min=0 required>
+        
+
+                <label for="reviews_per_month">Reviews per Month:</label>
+                <input type="number" name="reviews_per_month" step="0.01" required>
+        
+                <label for="calculated_host_listings_count">Host Listings Count:</label>
+                <input type="number" name="calculated_host_listings_count" min=0 required>
+        
+                <label for="availability_365">Availability in a Year:</label>
+                <input type="number" name="availability_365" min="1" required>
+                
+        
+                <button type="submit">Submit</button>
+          </form>
+
+          <div>
+            <p id="'display"> {{prediction}} </p>
+          </div>
+    </body>
+    
+
+</html>
