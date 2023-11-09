@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Form</title>
+</head>
+<body>
+    <h1>Heart Disease Detection</h1>
+    <form action="/predict" method="POST">
+
+        <label for="sex">Sex:</label>
+        <select name="sex">
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+        </select><br>
+
+        <label for="age">Age:</label>
+        <input type="number" name="age" required><br>
+
+        <label for="cp">Chest Pain Type:</label>
+        <select name="cp">
+            <option value="1">Type 1</option>
+            <option value="2">Type 2</option>
+            <option value="3">Type 3</option>
+            <option value="4">Type 4</option>
+        </select><br>
+
+        <label for="trestbps">Resting Blood Pressure:</label>
+        <input type="number" name="trestbps" required>
+        <span>mm Hg (80-120 Normal)</span><br>
+
+        <label for="chol">Cholesterol:</label>
+        <input type="number" name="chol" required>
+        <span>mg/dl</span><br>
+
+        <label for="fbs">Fasting Blood Sugar:</label>
+        <select name="fbs">
+            <option value="0">Normal</option>
+            <option value="1">Abnormal</option>
+        </select><br>
+
+        <label for="restecg">Resting ECG:</label>
+        <select name="restecg">
+            <option value="0">Normal</option>
+            <option value="1">Abnormality 1</option>
+            <option value="2">Abnormality 2</option>
+        </select><br>
+
+        <label for="thalach">Max Heart Rate:</label>
+        <input type="number" name="thalach" required><br>
+
+        <label for="exang">Exercise Induced Angina:</label>
+        <select name="exang">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br>
+
+        <label for="oldpeak">Old Peak:</label>
+        <input type="number" name="oldpeak" step="0.01" required><br>
+
+        <label for="slope">Slope:</label>
+        <select name="slope">
+            <option value="1">Upsloping</option>
+            <option value="2">Flat</option>
+            <option value="3">Downsloping</option>
+        </select><br>
+
+        <label for="ca">No. of Major Vessels:</label>
+        <select name="ca">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br>
+
+        <label for="thal">Thal:</label>
+        <select name="thal">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+
+        </select><br>
+
+        <div>
+            <button type="submit">
+                Submit
+            </button>
+        </div>
+
+    </form>
+    <div>
+        {{prediction}}
+        {% if prediction == 1 %}
+        <h2 style="color: red">Heart disease detected</h2>
+        {% else %}
+        <h2 style="color: green">No Heart disease detected </h2>
+        {% endif %}
+        <!-- <p id="display"></p> -->
+    </div>
+</body>
+</html>
