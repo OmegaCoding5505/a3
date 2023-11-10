@@ -1,38 +1,37 @@
-from sklearn.metrics import mean_absolute_error
 from flask import Flask, render_template, request
-import pickle
+import joblib
 
 app = Flask(__name__)
-xgb = pickle.load(open("models/xgb_model.pkl", 'rb'))
+
+lr = joblib.load(open("models/model.pkl", 'rb'))
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template("index.html")
+    return render_template("index1.html")
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    print('Hello world')
+    print('hello')
+    sex = int(request.form.get('sex'))
+    age = int(request.form.get('age'))
+    cp = int(request.form.get('cp'))
+    trestbps = int(request.form.get('trestbps'))
+    chol = int(request.form.get('chol'))
+    fbs = int(request.form.get('fbs'))
+    restecg = int(request.form.get('restecg'))
+    thalach = int(request.form.get('thalach'))
+    exang = int(request.form.get('exang'))
+    oldpeak = float(request.form.get('oldpeak'))
+    slope = int(request.form.get('slope'))
+    ca = int(request.form.get('ca'))
+    thal = int(request.form.get('thal'))
 
-    minimum_nights = float(request.form['minimum_nights'])
-    room_type = int(request.form['room_type'])
-    number_of_reviews = float(request.form['number_of_reviews'])
-    reviews_per_month = float(request.form['reviews_per_month'])
-    calculated_host_listings_count = float(request.form['calculated_host_listings_count'])
-    neighbourhood_group = int(request.form['neighbourhood_group'])
-    availability_365 = int(request.form['availability_365'])
-    latitude = float(request.form['latitude'])
-    longitude = float(request.form['longitude'])
+    input_data = [[sex, age,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]]
+    pred = lr.predict(input_data)
+    pred = 1 if pred == 1 else 0
+    print('world')
 
-    input_data = [[minimum_nights, number_of_reviews, calculated_host_listings_count, neighbourhood_group, room_type, reviews_per_month, availability_365, latitude, longitude]]
-    predicted_price = xgb.predict(input_data)
-
-    print('Hello worl2222d')
-
-    # mae = mean_absolute_error(actual_price, predicted_price)
-    # print(f'Mean Absolute Error (MAE): {mae:.2f}')
-
-    return render_template("index.html", prediction=predicted_price, parameter=input_data)
+    return render_template("index1.html", prediction=pred, parameter=input_data)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
-
+    app.run(host="0.0.0.0", port=5000,debug=True)
